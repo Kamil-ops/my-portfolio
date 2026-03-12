@@ -182,8 +182,25 @@
        HERO
     ═══════════════════════════════════════════════════════ */
     .hero {
+      position: relative;
+      overflow: hidden;
       padding: clamp(100px, 14vw, 180px) 0 clamp(80px, 10vw, 140px);
       border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--color-surface);
+      clip-path: polygon(48% 0, 100% 0, 100% 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-eyebrow {
@@ -745,7 +762,7 @@
       <p class="section-label">selected work</p>
       <div class="work-grid">
 
-        <article class="case-card">
+        <article class="case-card" onclick="location.href='case-study-financial-dashboard.html'" role="link" tabindex="0" onkeydown="if(event.key==='Enter')location.href='case-study-financial-dashboard.html'">
           <div class="case-body">
             <div class="case-tags">
               <span class="case-tag">fintech</span>
@@ -758,7 +775,7 @@
             </p>
             <div class="case-arrow">
               <span>2025</span>
-              <span>view case study →</span>
+              <a href="case-study-financial-dashboard.html">view case study →</a>
             </div>
           </div>
         </article>
