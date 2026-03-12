@@ -183,6 +183,8 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn-cv:hover {
@@ -268,6 +270,11 @@
       flex-wrap: wrap;
     }
 
+    @keyframes btn-shimmer {
+      from { transform: translateX(-100%) skewX(-20deg); }
+      to   { transform: translateX(300%) skewX(-20deg); }
+    }
+
     .btn-primary {
       font-family: var(--font);
       font-size: var(--text-xs);
@@ -279,6 +286,8 @@
       cursor: pointer;
       transition: opacity 0.15s;
       display: inline-block;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn-primary:hover { opacity: 0.85; }
@@ -292,17 +301,77 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn-ghost:hover { color: var(--color-fg); }
+
+    .btn-primary::after,
+    .btn-cv::after,
+    .btn-ghost::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 35%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
+      transform: translateX(-100%) skewX(-20deg);
+      pointer-events: none;
+    }
+
+    .btn-primary:hover::after,
+    .btn-cv:hover::after,
+    .btn-ghost:hover::after {
+      animation: btn-shimmer 0.55s ease forwards;
+    }
 
     .btn-ghost-arrow { font-size: 14px; }
 
     /* ═══════════════════════════════════════════════════════
        SKILLS
     ═══════════════════════════════════════════════════════ */
-    .skills-list {
-      border-top: 1px solid var(--color-border);
+    @keyframes skills-marquee-up {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-50%); }
+    }
+
+    .skills-marquee {
+      overflow: hidden;
+      height: 380px;
+      position: relative;
+    }
+
+    .skills-marquee::before,
+    .skills-marquee::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 90px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .skills-marquee::before {
+      top: 0;
+      background: linear-gradient(to bottom, var(--color-bg), transparent);
+    }
+
+    .skills-marquee::after {
+      bottom: 0;
+      background: linear-gradient(to top, var(--color-bg), transparent);
+    }
+
+    .skills-marquee-track {
+      display: flex;
+      flex-direction: column;
+      animation: skills-marquee-up 12s linear infinite;
+    }
+
+    .skills-marquee-track:has(.skill-row:hover) {
+      animation-play-state: paused;
     }
 
     .skill-row {
@@ -463,7 +532,8 @@
     }
 
     .case-card:hover .lock-shackle,
-    .btn-cv:hover .lock-shackle {
+    .btn-cv:hover .lock-shackle,
+    .btn-ghost:hover .lock-shackle {
       transform: rotate(-42deg);
     }
 
@@ -484,6 +554,11 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+      transition: background-color 0.2s;
+    }
+
+    .process-item:hover {
+      background-color: var(--color-surface);
     }
 
     .process-num {
@@ -524,6 +599,8 @@
       letter-spacing: var(--ls-tight);
       line-height: 1.2;
       color: var(--color-fg);
+      position: relative;
+      overflow: hidden;
     }
 
     .about-right {
@@ -536,6 +613,8 @@
       color: var(--color-dim);
       line-height: var(--lh-normal);
       margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
     }
 
     .about-body p:last-child { margin-bottom: 0; }
@@ -546,6 +625,28 @@
       letter-spacing: var(--ls-wide);
       color: var(--color-muted);
       margin-top: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-headline::after,
+    .about-body p::after,
+    .about-availability::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+      transform: translateX(-100%) skewX(-20deg);
+      pointer-events: none;
+    }
+
+    .about-headline:hover::after,
+    .about-body p:hover::after,
+    .about-availability:hover::after {
+      animation: btn-shimmer 0.7s ease forwards;
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -600,6 +701,11 @@
 
     .contact-link + .contact-link {
       border-left: 1px solid var(--color-border);
+    }
+
+    .contact-link.btn-ghost {
+      display: inline-flex;
+      align-items: center;
     }
 
     .contact-link:hover {
@@ -686,6 +792,33 @@
       .hero-headline {
         font-size: clamp(34px, 9vw, 52px);
       }
+
+      .skills-marquee { height: 300px; }
+
+      .skill-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        overflow: visible;
+        padding: 22px 0;
+      }
+
+      .skill-row-meta {
+        white-space: normal;
+        transform: translateY(6px);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: opacity 0.22s ease, transform 0.22s ease, max-height 0.22s ease;
+      }
+
+      .skill-row:hover .skill-row-meta {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 80px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
     }
 
     @media (max-width: 420px) {
@@ -716,7 +849,7 @@
           <li><a href="#work">work</a></li>
           <li><a href="#about">about</a></li>
           <li><a href="contact.html">contact</a></li>
-          <li><a href="#" class="btn-cv"><svg class="lock-icon" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="6" width="10" height="8" rx="1.5" fill="currentColor"/><g class="lock-shackle"><path d="M3 6V3.5A3 3 0 0 0 9 3.5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg>unlock cv</a></li>
+          <li><a href="Krystian_Kowalczyk_CV.pdf" target="_blank" rel="noopener" class="btn-cv"><svg class="lock-icon" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="6" width="10" height="8" rx="1.5" fill="currentColor"/><g class="lock-shackle"><path d="M3 6V3.5A3 3 0 0 0 9 3.5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg>unlock cv</a></li>
         </ul>
         <button class="nav-mobile-toggle" id="mobileToggle" aria-label="menu">menu</button>
       </div>
@@ -745,72 +878,125 @@
   <section class="section border-bottom" id="skills">
     <div class="container">
       <p class="section-label">tools &amp; skills</p>
-      <div class="skills-list">
+      <div class="skills-marquee">
+        <div class="skills-marquee-track">
 
-        <div class="skill-row">
-          <div class="skill-row-left">
-            <span class="skill-row-num">01</span>
-            <span class="skill-row-name">figma</span>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">01</span>
+              <span class="skill-row-name">figma</span>
+            </div>
+            <span class="skill-row-meta">interface design · prototyping · components</span>
           </div>
-          <span class="skill-row-meta">interface design · prototyping · components</span>
-        </div>
-
-        <div class="skill-row">
-          <div class="skill-row-left">
-            <span class="skill-row-num">02</span>
-            <span class="skill-row-name">webflow</span>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">02</span>
+              <span class="skill-row-name">webflow</span>
+            </div>
+            <span class="skill-row-meta">no-code development · cms · responsive</span>
           </div>
-          <span class="skill-row-meta">no-code development · cms · responsive</span>
-        </div>
-
-        <div class="skill-row">
-          <div class="skill-row-left">
-            <span class="skill-row-num">03</span>
-            <span class="skill-row-name">html</span>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">03</span>
+              <span class="skill-row-name">html</span>
+            </div>
+            <span class="skill-row-meta">semantic markup · structure · accessibility</span>
           </div>
-          <span class="skill-row-meta">semantic markup · structure · accessibility</span>
-        </div>
-
-        <div class="skill-row">
-          <div class="skill-row-left">
-            <span class="skill-row-num">04</span>
-            <span class="skill-row-name">css</span>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">04</span>
+              <span class="skill-row-name">css</span>
+            </div>
+            <span class="skill-row-meta">layout · animation · custom properties</span>
           </div>
-          <span class="skill-row-meta">layout · animation · custom properties</span>
-        </div>
-
-        <div class="skill-row">
-          <div class="skill-row-left">
-            <span class="skill-row-num">05</span>
-            <span class="skill-row-name">javascript</span>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">05</span>
+              <span class="skill-row-name">javascript</span>
+            </div>
+            <span class="skill-row-meta">interaction · dom manipulation · vanilla js</span>
           </div>
-          <span class="skill-row-meta">interaction · dom manipulation · vanilla js</span>
-        </div>
-
-        <div class="skill-row">
-          <div class="skill-row-left">
-            <span class="skill-row-num">06</span>
-            <span class="skill-row-name">git</span>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">06</span>
+              <span class="skill-row-name">git</span>
+            </div>
+            <span class="skill-row-meta">version control · branching · collaboration</span>
           </div>
-          <span class="skill-row-meta">version control · branching · collaboration</span>
-        </div>
-
-        <div class="skill-row">
-          <div class="skill-row-left">
-            <span class="skill-row-num">07</span>
-            <span class="skill-row-name">notion</span>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">07</span>
+              <span class="skill-row-name">notion</span>
+            </div>
+            <span class="skill-row-meta">documentation · project management · wikis</span>
           </div>
-          <span class="skill-row-meta">documentation · project management · wikis</span>
-        </div>
-
-        <div class="skill-row">
-          <div class="skill-row-left">
-            <span class="skill-row-num">08</span>
-            <span class="skill-row-name">miro</span>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">08</span>
+              <span class="skill-row-name">miro</span>
+            </div>
+            <span class="skill-row-meta">research synthesis · workshops · mapping</span>
           </div>
-          <span class="skill-row-meta">research synthesis · workshops · mapping</span>
-        </div>
 
+          <!-- duplicate for seamless loop -->
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">01</span>
+              <span class="skill-row-name">figma</span>
+            </div>
+            <span class="skill-row-meta">interface design · prototyping · components</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">02</span>
+              <span class="skill-row-name">webflow</span>
+            </div>
+            <span class="skill-row-meta">no-code development · cms · responsive</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">03</span>
+              <span class="skill-row-name">html</span>
+            </div>
+            <span class="skill-row-meta">semantic markup · structure · accessibility</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">04</span>
+              <span class="skill-row-name">css</span>
+            </div>
+            <span class="skill-row-meta">layout · animation · custom properties</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">05</span>
+              <span class="skill-row-name">javascript</span>
+            </div>
+            <span class="skill-row-meta">interaction · dom manipulation · vanilla js</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">06</span>
+              <span class="skill-row-name">git</span>
+            </div>
+            <span class="skill-row-meta">version control · branching · collaboration</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">07</span>
+              <span class="skill-row-name">notion</span>
+            </div>
+            <span class="skill-row-meta">documentation · project management · wikis</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">08</span>
+              <span class="skill-row-name">miro</span>
+            </div>
+            <span class="skill-row-meta">research synthesis · workshops · mapping</span>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
@@ -878,7 +1064,7 @@
       </div>
       <div style="margin-top: 40px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--color-border); padding-top: 32px;">
         <span style="font-size: 13px; font-weight: 400; letter-spacing: 0.05em; color: var(--color-muted);">3 projects shown</span>
-        <a href="work.html" class="btn-ghost">see all projects <span class="btn-ghost-arrow">→</span></a>
+        <a href="work.html" class="btn-ghost"><svg class="lock-icon" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="6" width="10" height="8" rx="1.5" fill="currentColor"/><g class="lock-shackle"><path d="M3 6V3.5A3 3 0 0 0 9 3.5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg>unlock all projects</a>
       </div>
     </div>
   </section>
@@ -931,7 +1117,7 @@
             <p>i work across the full design cycle. from early discovery and synthesis through to production-ready handoff. i care about the space between research and execution — where most design value gets lost.</p>
           </div>
           <p class="about-availability">currently open to full-time ux roles</p>
-          <a href="about.html" class="btn-ghost" style="margin-top: 28px;">more about me <span class="btn-ghost-arrow">→</span></a>
+          <a href="about.html" class="btn-ghost" style="margin-top: 28px;"><svg class="lock-icon" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="6" width="10" height="8" rx="1.5" fill="currentColor"/><g class="lock-shackle"><path d="M3 6V3.5A3 3 0 0 0 9 3.5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg>unlock about me</a>
         </div>
 
       </div>
@@ -950,7 +1136,7 @@
       </p>
       <div class="contact-links">
         <a href="mailto:krystiank@email.com" class="contact-link">krystiank@email.com</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener" class="contact-link">linkedin →</a>
+        <a href="https://www.linkedin.com/in/krystian-kowalczyk-1888b4300/?skipRedirect=true" target="_blank" rel="noopener" class="contact-link btn-ghost"><svg class="lock-icon" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="6" width="10" height="8" rx="1.5" fill="currentColor"/><g class="lock-shackle"><path d="M3 6V3.5A3 3 0 0 0 9 3.5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg>unlock linkedin</a>
       </div>
     </div>
   </section>
@@ -1141,14 +1327,14 @@
             float offset = random(lineIndex + 100.0);
             float y      = fract(uv.y + time * speed + offset);
 
-            float lineWidth = 0.04 + random(lineIndex + 200.0) * 0.06;
-            float edge      = 0.008;
+            float lineWidth = 0.12 + random(lineIndex + 200.0) * 0.16;
+            float edge      = 0.012;
             float alpha     = smoothstep(0.0, edge, linePos) * smoothstep(lineWidth, lineWidth - edge, linePos);
             alpha          *= smoothstep(0.0, 0.15, y) * smoothstep(1.0, 0.85, y);
 
             vec3 color = vec3(alpha);
 
-            gl_FragColor = vec4(color[0] * 0.04, color[1] * 0.04, color[0] * 0.04, 1.0);
+            gl_FragColor = vec4(color[0] * 0.02, color[1] * 0.02, color[0] * 0.02, 1.0);
           }
         `
       });
@@ -1175,6 +1361,77 @@
       }
 
       tick2();
+    }());
+  </script>
+
+  <!-- ══ THREE.JS CONTACT SHADER ═══════════════════════════ -->
+  <script>
+    (function () {
+      const contact = document.getElementById('contact');
+
+      const renderer3 = new THREE.WebGLRenderer({ antialias: false });
+      renderer3.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+      const canvas3 = renderer3.domElement;
+      canvas3.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block;';
+      contact.style.position = 'relative';
+      contact.insertBefore(canvas3, contact.firstChild);
+
+      const scene3  = new THREE.Scene();
+      const camera3 = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+      const geo3    = new THREE.PlaneGeometry(2, 2);
+
+      const mat3 = new THREE.ShaderMaterial({
+        uniforms: {
+          uTime: { value: 0.0 },
+          uRes:  { value: new THREE.Vector2(1, 1) }
+        },
+        vertexShader: `
+          void main() { gl_Position = vec4(position, 1.0); }
+        `,
+        fragmentShader: `
+          precision mediump float;
+          uniform float uTime;
+          uniform vec2  uRes;
+
+          void main() {
+            vec2  uv   = (gl_FragCoord.xy - 0.5 * uRes) / min(uRes.x, uRes.y);
+            float d    = length(uv);
+
+            float r1   = sin(d * 20.0 - uTime * 0.30) * 0.5 + 0.5;
+            float r2   = sin(d * 11.0 + uTime * 0.14) * 0.5 + 0.5;
+
+            float fade = pow(clamp(1.0 - d * 1.05, 0.0, 1.0), 1.6);
+
+            float b    = (r1 * 0.6 + r2 * 0.4) * fade * 0.036;
+
+            gl_FragColor = vec4(vec3(0.0314 + b), 1.0);
+          }
+        `
+      });
+
+      scene3.add(new THREE.Mesh(geo3, mat3));
+
+      function resize3() {
+        const w   = contact.offsetWidth;
+        const h   = contact.offsetHeight;
+        renderer3.setSize(w, h);
+        const dpr = renderer3.getPixelRatio();
+        mat3.uniforms.uRes.value.set(w * dpr, h * dpr);
+      }
+
+      resize3();
+      window.addEventListener('resize', resize3);
+
+      const clock3 = new THREE.Clock();
+
+      function tick3() {
+        mat3.uniforms.uTime.value = clock3.getElapsedTime();
+        renderer3.render(scene3, camera3);
+        requestAnimationFrame(tick3);
+      }
+
+      tick3();
     }());
   </script>
 

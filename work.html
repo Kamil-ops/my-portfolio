@@ -126,6 +126,11 @@
 
     .nav-links a:hover { color: var(--color-fg); }
 
+    @keyframes btn-shimmer {
+      from { transform: translateX(-100%) skewX(-20deg); }
+      to   { transform: translateX(300%) skewX(-20deg); }
+    }
+
     .btn-cv {
       font-size: var(--text-xs);
       font-weight: 400;
@@ -136,6 +141,11 @@
       background: transparent;
       cursor: pointer;
       transition: border-color 0.15s;
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .btn-cv:hover { border-color: var(--color-dim); }
@@ -149,9 +159,39 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn-ghost:hover { color: var(--color-fg); }
+
+    .lock-shackle {
+      transform-origin: 9px 6px;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-cv:hover .lock-shackle,
+    .btn-ghost:hover .lock-shackle {
+      transform: rotate(-42deg);
+    }
+
+    .btn-cv::after,
+    .btn-ghost::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 35%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
+      transform: translateX(-100%) skewX(-20deg);
+      pointer-events: none;
+    }
+
+    .btn-cv:hover::after,
+    .btn-ghost:hover::after {
+      animation: btn-shimmer 0.55s ease forwards;
+    }
 
     .nav-mobile-toggle {
       display: none;
@@ -320,6 +360,11 @@
       border-left: 1px solid var(--color-border);
     }
 
+    .contact-link.btn-ghost {
+      display: inline-flex;
+      align-items: center;
+    }
+
     .contact-link:hover {
       color: var(--color-fg);
       background-color: var(--color-surface);
@@ -389,7 +434,7 @@
           <li><a href="index.html#work" style="color: var(--color-fg);">work</a></li>
           <li><a href="index.html#about">about</a></li>
           <li><a href="contact.html">contact</a></li>
-          <li><a href="#" class="btn-cv">download cv</a></li>
+          <li><a href="Krystian_Kowalczyk_CV.pdf" target="_blank" rel="noopener" class="btn-cv"><svg class="lock-icon" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="6" width="10" height="8" rx="1.5" fill="currentColor"/><g class="lock-shackle"><path d="M3 6V3.5A3 3 0 0 0 9 3.5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg>unlock cv</a></li>
         </ul>
         <button class="nav-mobile-toggle" id="mobileToggle" aria-label="menu">menu</button>
       </div>
@@ -490,7 +535,7 @@
       </p>
       <div class="contact-links">
         <a href="mailto:krystiank@email.com" class="contact-link">krystiank@email.com</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener" class="contact-link">linkedin →</a>
+        <a href="https://www.linkedin.com/in/krystian-kowalczyk-1888b4300/?skipRedirect=true" target="_blank" rel="noopener" class="contact-link btn-ghost"><svg class="lock-icon" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="6" width="10" height="8" rx="1.5" fill="currentColor"/><g class="lock-shackle"><path d="M3 6V3.5A3 3 0 0 0 9 3.5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg>unlock linkedin</a>
       </div>
     </div>
   </section>
