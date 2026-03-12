@@ -89,10 +89,14 @@
       max-width: var(--container);
       margin: 0 auto;
       padding: 0 var(--pad-x);
+      position: relative;
+      z-index: 1;
     }
 
     .section {
       padding: var(--pad-section) 0;
+      position: relative;
+      overflow: hidden;
     }
 
     .section-label {
@@ -107,6 +111,22 @@
     /* ── hairline border ────────────────────────────────── */
     .border-top    { border-top:    1px solid var(--color-border); }
     .border-bottom { border-bottom: 1px solid var(--color-border); }
+
+    /* ── decorative section shapes ──────────────────────── */
+    #contact {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--color-surface);
+      pointer-events: none;
+      z-index: 0;
+      clip-path: polygon(50% 10%, 88% 88%, 12% 88%);
+    }
 
     /* ═══════════════════════════════════════════════════════
        NAV
@@ -160,6 +180,9 @@
       background: transparent;
       cursor: pointer;
       transition: border-color 0.15s, color 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .btn-cv:hover {
@@ -186,16 +209,6 @@
       overflow: hidden;
       padding: clamp(100px, 14vw, 180px) 0 clamp(80px, 10vw, 140px);
       border-bottom: 1px solid var(--color-border);
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: var(--color-surface);
-      clip-path: polygon(48% 0, 100% 0, 100% 100%);
-      z-index: 0;
-      pointer-events: none;
     }
 
     .hero .container {
@@ -288,51 +301,64 @@
     /* ═══════════════════════════════════════════════════════
        SKILLS
     ═══════════════════════════════════════════════════════ */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      border-left: 1px solid var(--color-border);
+    .skills-list {
       border-top: 1px solid var(--color-border);
     }
 
-    .skill-item {
-      border-right: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
-      padding: 28px 16px 24px;
+    .skill-row {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 14px;
-      transition: background-color 0.15s;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--color-border);
+      overflow: hidden;
     }
 
-    .skill-item:hover {
-      background-color: var(--color-surface);
+    .skill-row-left {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      min-width: 0;
     }
 
-    .skill-item img {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
-      filter: brightness(0) invert(0.7);
-      transition: filter 0.15s;
-    }
-
-    .skill-item:hover img {
-      filter: brightness(0) invert(1);
-    }
-
-    .skill-name {
+    .skill-row-num {
       font-size: 11px;
       font-weight: 400;
       letter-spacing: var(--ls-wide);
       color: var(--color-muted);
-      text-align: center;
-      transition: color 0.15s;
+      flex-shrink: 0;
+      width: 20px;
     }
 
-    .skill-item:hover .skill-name {
+    .skill-row-name {
+      font-size: clamp(26px, 3.5vw, 48px);
+      font-weight: 300;
+      letter-spacing: var(--ls-tight);
+      line-height: 1;
+      color: var(--color-fg);
+      transition: color 0.2s;
+    }
+
+    .skill-row-meta {
+      font-size: var(--text-xs);
+      font-weight: 400;
+      letter-spacing: var(--ls-wide);
+      color: var(--color-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .skill-row:hover .skill-row-name {
       color: var(--color-dim);
+    }
+
+    .skill-row:hover .skill-row-meta {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -418,6 +444,27 @@
 
     .case-card:hover .case-arrow {
       color: var(--color-dim);
+    }
+
+    .case-arrow > *:last-child {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── lock icon ───────────────────────────────────────── */
+    .lock-icon {
+      flex-shrink: 0;
+    }
+
+    .lock-shackle {
+      transform-origin: 9px 6px;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .case-card:hover .lock-shackle,
+    .btn-cv:hover .lock-shackle {
+      transform: rotate(-42deg);
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -595,10 +642,6 @@
        RESPONSIVE
     ═══════════════════════════════════════════════════════ */
     @media (max-width: 900px) {
-      .skills-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
       .work-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -632,11 +675,7 @@
 
       .nav-mobile-toggle { display: block; }
 
-      .skills-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .work-grid {
+.work-grid {
         grid-template-columns: 1fr;
       }
 
@@ -650,11 +689,7 @@
     }
 
     @media (max-width: 420px) {
-      .skills-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .process-grid {
+.process-grid {
         grid-template-columns: 1fr;
       }
 
@@ -681,7 +716,7 @@
           <li><a href="#work">work</a></li>
           <li><a href="#about">about</a></li>
           <li><a href="contact.html">contact</a></li>
-          <li><a href="#" class="btn-cv">download cv</a></li>
+          <li><a href="#" class="btn-cv"><svg class="lock-icon" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="6" width="10" height="8" rx="1.5" fill="currentColor"/><g class="lock-shackle"><path d="M3 6V3.5A3 3 0 0 0 9 3.5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg>unlock cv</a></li>
         </ul>
         <button class="nav-mobile-toggle" id="mobileToggle" aria-label="menu">menu</button>
       </div>
@@ -710,46 +745,70 @@
   <section class="section border-bottom" id="skills">
     <div class="container">
       <p class="section-label">tools &amp; skills</p>
-      <div class="skills-grid">
+      <div class="skills-list">
 
-        <div class="skill-item">
-          <img src="https://cdn.simpleicons.org/figma/ffffff" alt="Figma" width="28" height="28" />
-          <span class="skill-name">figma</span>
+        <div class="skill-row">
+          <div class="skill-row-left">
+            <span class="skill-row-num">01</span>
+            <span class="skill-row-name">figma</span>
+          </div>
+          <span class="skill-row-meta">interface design · prototyping · components</span>
         </div>
 
-        <div class="skill-item">
-          <img src="https://cdn.simpleicons.org/webflow/ffffff" alt="Webflow" width="28" height="28" />
-          <span class="skill-name">webflow</span>
+        <div class="skill-row">
+          <div class="skill-row-left">
+            <span class="skill-row-num">02</span>
+            <span class="skill-row-name">webflow</span>
+          </div>
+          <span class="skill-row-meta">no-code development · cms · responsive</span>
         </div>
 
-        <div class="skill-item">
-          <img src="https://cdn.simpleicons.org/html5/ffffff" alt="HTML" width="28" height="28" />
-          <span class="skill-name">html</span>
+        <div class="skill-row">
+          <div class="skill-row-left">
+            <span class="skill-row-num">03</span>
+            <span class="skill-row-name">html</span>
+          </div>
+          <span class="skill-row-meta">semantic markup · structure · accessibility</span>
         </div>
 
-        <div class="skill-item">
-          <img src="https://cdn.simpleicons.org/css3/ffffff" alt="CSS" width="28" height="28" />
-          <span class="skill-name">css</span>
+        <div class="skill-row">
+          <div class="skill-row-left">
+            <span class="skill-row-num">04</span>
+            <span class="skill-row-name">css</span>
+          </div>
+          <span class="skill-row-meta">layout · animation · custom properties</span>
         </div>
 
-        <div class="skill-item">
-          <img src="https://cdn.simpleicons.org/javascript/ffffff" alt="JavaScript" width="28" height="28" />
-          <span class="skill-name">javascript</span>
+        <div class="skill-row">
+          <div class="skill-row-left">
+            <span class="skill-row-num">05</span>
+            <span class="skill-row-name">javascript</span>
+          </div>
+          <span class="skill-row-meta">interaction · dom manipulation · vanilla js</span>
         </div>
 
-        <div class="skill-item">
-          <img src="https://cdn.simpleicons.org/git/ffffff" alt="Git" width="28" height="28" />
-          <span class="skill-name">git</span>
+        <div class="skill-row">
+          <div class="skill-row-left">
+            <span class="skill-row-num">06</span>
+            <span class="skill-row-name">git</span>
+          </div>
+          <span class="skill-row-meta">version control · branching · collaboration</span>
         </div>
 
-        <div class="skill-item">
-          <img src="https://cdn.simpleicons.org/notion/ffffff" alt="Notion" width="28" height="28" />
-          <span class="skill-name">notion</span>
+        <div class="skill-row">
+          <div class="skill-row-left">
+            <span class="skill-row-num">07</span>
+            <span class="skill-row-name">notion</span>
+          </div>
+          <span class="skill-row-meta">documentation · project management · wikis</span>
         </div>
 
-        <div class="skill-item">
-          <img src="https://cdn.simpleicons.org/miro/ffffff" alt="Miro" width="28" height="28" />
-          <span class="skill-name">miro</span>
+        <div class="skill-row">
+          <div class="skill-row-left">
+            <span class="skill-row-num">08</span>
+            <span class="skill-row-name">miro</span>
+          </div>
+          <span class="skill-row-meta">research synthesis · workshops · mapping</span>
         </div>
 
       </div>
@@ -775,7 +834,7 @@
             </p>
             <div class="case-arrow">
               <span>2025</span>
-              <a href="case-study-financial-dashboard.html">view case study →</a>
+              <a href="case-study-financial-dashboard.html"><svg class="lock-icon" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="6" width="10" height="8" rx="1.5" fill="currentColor"/><g class="lock-shackle"><path d="M3 6V3.5A3 3 0 0 0 9 3.5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg>unlock case study</a>
             </div>
           </div>
         </article>
@@ -793,7 +852,7 @@
             </p>
             <div class="case-arrow">
               <span>2025</span>
-              <span>view case study →</span>
+              <span><svg class="lock-icon" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="6" width="10" height="8" rx="1.5" fill="currentColor"/><g class="lock-shackle"><path d="M3 6V3.5A3 3 0 0 0 9 3.5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg>unlock case study</span>
             </div>
           </div>
         </article>
@@ -811,7 +870,7 @@
             </p>
             <div class="case-arrow">
               <span>2025</span>
-              <span>view case study →</span>
+              <span><svg class="lock-icon" width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true" focusable="false"><rect x="1" y="6" width="10" height="8" rx="1.5" fill="currentColor"/><g class="lock-shackle"><path d="M3 6V3.5A3 3 0 0 0 9 3.5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg>unlock case study</span>
             </div>
           </div>
         </article>
@@ -959,6 +1018,164 @@
         toggle.textContent = 'menu';
       });
     });
+  </script>
+
+  <!-- ══ THREE.JS HERO SHADER ═══════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    (function () {
+      const hero = document.querySelector('.hero');
+
+      const renderer = new THREE.WebGLRenderer({ antialias: false });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+      const canvas = renderer.domElement;
+      canvas.style.cssText = 'position:absolute;top:0;left:0;z-index:0;pointer-events:none;display:block;';
+      hero.insertBefore(canvas, hero.firstChild);
+
+      const scene  = new THREE.Scene();
+      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+      const geo    = new THREE.PlaneGeometry(2, 2);
+
+      const mat = new THREE.ShaderMaterial({
+        uniforms: {
+          uTime: { value: 0.0 },
+          uRes:  { value: new THREE.Vector2(1, 1) }
+        },
+        vertexShader: `
+          void main() { gl_Position = vec4(position, 1.0); }
+        `,
+        fragmentShader: `
+          precision mediump float;
+          uniform float uTime;
+          uniform vec2  uRes;
+
+          void main() {
+            // Normalise coords — centred, aspect-corrected
+            vec2  uv   = (gl_FragCoord.xy - 0.5 * uRes) / min(uRes.x, uRes.y);
+            float d    = length(uv);
+
+            // Two ring harmonics at different speeds and scales
+            float r1   = sin(d * 20.0 - uTime * 0.30) * 0.5 + 0.5;
+            float r2   = sin(d * 11.0 + uTime * 0.14) * 0.5 + 0.5;
+
+            // Radial fade — rings fade out from centre outward
+            float fade = pow(clamp(1.0 - d * 1.05, 0.0, 1.0), 1.6);
+
+            // Lift brightness from #080808 (0.0314) toward #111111 (0.067)
+            float b    = (r1 * 0.6 + r2 * 0.4) * fade * 0.036;
+
+            gl_FragColor = vec4(vec3(0.0314 + b), 1.0);
+          }
+        `
+      });
+
+      scene.add(new THREE.Mesh(geo, mat));
+
+      function resize() {
+        const w   = hero.offsetWidth;
+        const h   = hero.offsetHeight;
+        renderer.setSize(w, h);
+        const dpr = renderer.getPixelRatio();
+        mat.uniforms.uRes.value.set(w * dpr, h * dpr);
+      }
+
+      resize();
+      window.addEventListener('resize', resize);
+
+      const clock = new THREE.Clock();
+
+      function tick() {
+        mat.uniforms.uTime.value = clock.getElapsedTime();
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+
+      tick();
+    }());
+  </script>
+
+  <!-- ══ THREE.JS WORK SECTION SHADER ══════════════════════ -->
+  <!-- Reuses THREE already loaded above (r128) — no second CDN tag needed -->
+  <script>
+    (function () {
+      const workSection = document.getElementById('work');
+
+      const renderer2 = new THREE.WebGLRenderer({ antialias: false });
+      renderer2.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+      const canvas2 = renderer2.domElement;
+      canvas2.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block;';
+      workSection.style.position = 'relative';
+      workSection.insertBefore(canvas2, workSection.firstChild);
+
+      const scene2  = new THREE.Scene();
+      const camera2 = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+      const geo2    = new THREE.PlaneGeometry(2, 2);
+
+      const mat2 = new THREE.ShaderMaterial({
+        uniforms: {
+          time: { value: 0.0 },
+          uRes: { value: new THREE.Vector2(1, 1) }
+        },
+        vertexShader: `
+          void main() { gl_Position = vec4(position, 1.0); }
+        `,
+        fragmentShader: `
+          precision mediump float;
+          uniform float time;
+          uniform vec2  uRes;
+
+          float random(float x) {
+            return fract(sin(x * 127.1) * 43758.5453);
+          }
+
+          void main() {
+            vec2 uv = gl_FragCoord.xy / uRes;
+
+            float numLines = 60.0;
+            float lineIndex = floor(uv.x * numLines);
+            float linePos   = fract(uv.x * numLines);
+
+            float speed  = random(lineIndex) * 0.4 + 0.1;
+            float offset = random(lineIndex + 100.0);
+            float y      = fract(uv.y + time * speed + offset);
+
+            float lineWidth = 0.04 + random(lineIndex + 200.0) * 0.06;
+            float edge      = 0.008;
+            float alpha     = smoothstep(0.0, edge, linePos) * smoothstep(lineWidth, lineWidth - edge, linePos);
+            alpha          *= smoothstep(0.0, 0.15, y) * smoothstep(1.0, 0.85, y);
+
+            vec3 color = vec3(alpha);
+
+            gl_FragColor = vec4(color[0] * 0.04, color[1] * 0.04, color[0] * 0.04, 1.0);
+          }
+        `
+      });
+
+      scene2.add(new THREE.Mesh(geo2, mat2));
+
+      function resize2() {
+        const w   = workSection.offsetWidth;
+        const h   = workSection.offsetHeight;
+        renderer2.setSize(w, h);
+        const dpr = renderer2.getPixelRatio();
+        mat2.uniforms.uRes.value.set(w * dpr, h * dpr);
+      }
+
+      resize2();
+      window.addEventListener('resize', resize2);
+
+      const clock2 = new THREE.Clock();
+
+      function tick2() {
+        mat2.uniforms.time.value = clock2.getElapsedTime();
+        renderer2.render(scene2, camera2);
+        requestAnimationFrame(tick2);
+      }
+
+      tick2();
+    }());
   </script>
 
 </body>
