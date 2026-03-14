@@ -422,24 +422,64 @@
     .skills-marquee-track {
       display: flex;
       flex-direction: column;
-      animation: marquee-up 10s linear infinite;
+      animation: marquee-up 24s linear infinite;
     }
 
-    .skills-marquee-track:hover { animation-play-state: paused; }
+    .skills-marquee-track:has(.skill-row:hover) { animation-play-state: paused; }
 
-    .skills-marquee-item {
-      font-size: clamp(36px, 5.5vw, 72px);
+    .skill-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--color-border);
+      overflow: hidden;
+    }
+
+    .skill-row-left {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      min-width: 0;
+    }
+
+    .skill-row-num {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: var(--ls-wide);
+      color: var(--color-muted);
+      flex-shrink: 0;
+      width: 20px;
+    }
+
+    .skill-row-name {
+      font-size: clamp(26px, 3.5vw, 48px);
       font-weight: 300;
       letter-spacing: var(--ls-tight);
       line-height: 1;
-      color: var(--color-muted);
-      padding: 22px 0;
-      border-bottom: 1px solid var(--color-border);
+      color: var(--color-fg);
       transition: color 0.2s;
-      cursor: default;
     }
 
-    .skills-marquee-item:hover { color: var(--color-fg); }
+    .skill-row-meta {
+      font-size: var(--text-xs);
+      font-weight: 400;
+      letter-spacing: var(--ls-wide);
+      color: var(--color-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .skill-row:hover .skill-row-name { color: var(--color-dim); }
+
+    .skill-row:hover .skill-row-meta {
+      opacity: 1;
+      transform: translateX(0);
+    }
 
     /* ═══════════════════════════════════════════════════════
        VALUES
@@ -458,6 +498,11 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+      transition: background-color 0.2s;
+    }
+
+    .value-item:hover {
+      background-color: var(--color-surface);
     }
 
     .value-title {
@@ -528,6 +573,11 @@
 
     .contact-link + .contact-link {
       border-left: 1px solid var(--color-border);
+    }
+
+    .contact-link.btn-ghost {
+      display: inline-flex;
+      align-items: center;
     }
 
     .contact-link:hover {
@@ -696,23 +746,189 @@
       <p class="section-label">tools &amp; skills</p>
       <div class="skills-marquee">
         <div class="skills-marquee-track">
-          <span class="skills-marquee-item">figma</span>
-          <span class="skills-marquee-item">webflow</span>
-          <span class="skills-marquee-item">html</span>
-          <span class="skills-marquee-item">css</span>
-          <span class="skills-marquee-item">javascript</span>
-          <span class="skills-marquee-item">git</span>
-          <span class="skills-marquee-item">notion</span>
-          <span class="skills-marquee-item">miro</span>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">01</span>
+              <span class="skill-row-name">figma</span>
+            </div>
+            <span class="skill-row-meta">interface design · prototyping · components</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">02</span>
+              <span class="skill-row-name">agentic ai development</span>
+            </div>
+            <span class="skill-row-meta">ai agents · tool use · claude api · autonomous workflows</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">03</span>
+              <span class="skill-row-name">claude ai</span>
+            </div>
+            <span class="skill-row-meta">prompt design · claude api · mcp · ai-assisted products</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">04</span>
+              <span class="skill-row-name">webflow</span>
+            </div>
+            <span class="skill-row-meta">no-code development · cms · responsive</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">05</span>
+              <span class="skill-row-name">user research</span>
+            </div>
+            <span class="skill-row-meta">interviews · usability testing · synthesis</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">06</span>
+              <span class="skill-row-name">html &amp; css</span>
+            </div>
+            <span class="skill-row-meta">semantic markup · layout · animation · accessibility</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">07</span>
+              <span class="skill-row-name">javascript</span>
+            </div>
+            <span class="skill-row-meta">interaction · dom manipulation · vanilla js</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">08</span>
+              <span class="skill-row-name">interaction design</span>
+            </div>
+            <span class="skill-row-meta">flows · micro-interactions · prototyping</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">09</span>
+              <span class="skill-row-name">product strategy</span>
+            </div>
+            <span class="skill-row-meta">discovery · prioritisation · roadmapping</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">10</span>
+              <span class="skill-row-name">service design</span>
+            </div>
+            <span class="skill-row-meta">service blueprints · journey mapping · systems</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">11</span>
+              <span class="skill-row-name">git</span>
+            </div>
+            <span class="skill-row-meta">version control · branching · collaboration</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">12</span>
+              <span class="skill-row-name">notion</span>
+            </div>
+            <span class="skill-row-meta">documentation · project management · wikis</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">13</span>
+              <span class="skill-row-name">miro</span>
+            </div>
+            <span class="skill-row-meta">research synthesis · workshops · mapping</span>
+          </div>
           <!-- duplicate for seamless loop -->
-          <span class="skills-marquee-item">figma</span>
-          <span class="skills-marquee-item">webflow</span>
-          <span class="skills-marquee-item">html</span>
-          <span class="skills-marquee-item">css</span>
-          <span class="skills-marquee-item">javascript</span>
-          <span class="skills-marquee-item">git</span>
-          <span class="skills-marquee-item">notion</span>
-          <span class="skills-marquee-item">miro</span>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">01</span>
+              <span class="skill-row-name">figma</span>
+            </div>
+            <span class="skill-row-meta">interface design · prototyping · components</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">02</span>
+              <span class="skill-row-name">agentic ai development</span>
+            </div>
+            <span class="skill-row-meta">ai agents · tool use · claude api · autonomous workflows</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">03</span>
+              <span class="skill-row-name">claude ai</span>
+            </div>
+            <span class="skill-row-meta">prompt design · claude api · mcp · ai-assisted products</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">04</span>
+              <span class="skill-row-name">webflow</span>
+            </div>
+            <span class="skill-row-meta">no-code development · cms · responsive</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">05</span>
+              <span class="skill-row-name">user research</span>
+            </div>
+            <span class="skill-row-meta">interviews · usability testing · synthesis</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">06</span>
+              <span class="skill-row-name">html &amp; css</span>
+            </div>
+            <span class="skill-row-meta">semantic markup · layout · animation · accessibility</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">07</span>
+              <span class="skill-row-name">javascript</span>
+            </div>
+            <span class="skill-row-meta">interaction · dom manipulation · vanilla js</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">08</span>
+              <span class="skill-row-name">interaction design</span>
+            </div>
+            <span class="skill-row-meta">flows · micro-interactions · prototyping</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">09</span>
+              <span class="skill-row-name">product strategy</span>
+            </div>
+            <span class="skill-row-meta">discovery · prioritisation · roadmapping</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">10</span>
+              <span class="skill-row-name">service design</span>
+            </div>
+            <span class="skill-row-meta">service blueprints · journey mapping · systems</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">11</span>
+              <span class="skill-row-name">git</span>
+            </div>
+            <span class="skill-row-meta">version control · branching · collaboration</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">12</span>
+              <span class="skill-row-name">notion</span>
+            </div>
+            <span class="skill-row-meta">documentation · project management · wikis</span>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-left">
+              <span class="skill-row-num">13</span>
+              <span class="skill-row-name">miro</span>
+            </div>
+            <span class="skill-row-meta">research synthesis · workshops · mapping</span>
+          </div>
         </div>
       </div>
     </div>
