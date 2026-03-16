@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FormSense — krystian</title>
+  <title>portfolio redesign — krystian</title>
   <style>
     /* ── fonts ─────────────────────────────────────────── */
     @font-face { font-family: Matter; src: url(fonts/Matter-TRIAL-Light.otf) format("opentype"); font-weight: 300; font-style: normal; }
@@ -283,15 +283,6 @@
       font-weight: 400;
     }
 
-    .cs-meta-link {
-      font-size: var(--text-sm);
-      color: var(--color-accent);
-      font-weight: 400;
-      transition: opacity 0.15s;
-    }
-
-    .cs-meta-link:hover { opacity: 0.75; }
-
     /* ── sections ─────────────────────────────────────── */
     .cs-section {
       padding: 72px 0;
@@ -310,6 +301,7 @@
       margin-bottom: 20px;
     }
 
+    /* ── section heading with hover interaction ───────── */
     .cs-section-heading {
       font-size: var(--text-2xl);
       font-weight: 300;
@@ -345,54 +337,6 @@
 
     .cs-section-text p + p { margin-top: 16px; }
 
-    /* placeholder image block */
-    .cs-img {
-      background-color: var(--color-surface);
-      border: 1px solid var(--color-border);
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      margin-top: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cs-img.tall  { aspect-ratio: 4 / 3; }
-    .cs-img.short { aspect-ratio: 21 / 9; }
-
-    .cs-img span {
-      font-size: var(--text-xs);
-      letter-spacing: var(--ls-wide);
-      color: var(--color-muted);
-    }
-
-    .cs-img + .cs-img { margin-top: 1px; }
-
-    /* screenshot blocks */
-    .cs-screenshot {
-      margin-top: 40px;
-      border-radius: 8px;
-      border: 1px solid var(--color-border);
-      overflow: hidden;
-    }
-
-    .cs-screenshot img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .cs-screenshot + .cs-screenshot { margin-top: 20px; }
-
-    .cs-screenshot-caption {
-      font-size: var(--text-xs);
-      letter-spacing: var(--ls-wide);
-      color: var(--color-muted);
-      padding: 12px 16px;
-      border-top: 1px solid var(--color-border);
-    }
-
     /* two-column blocks */
     .cs-two-col {
       display: grid;
@@ -421,53 +365,15 @@
       line-height: var(--lh-normal);
     }
 
-    .cs-two-col-item code {
-      font-family: ui-monospace, 'SF Mono', 'Fira Code', monospace;
-      font-size: 11px;
-      color: var(--color-accent);
-      background: rgba(129, 173, 236, 0.08);
-      padding: 1px 5px;
-      border-radius: 2px;
-    }
-
-    /* stat row */
-    .cs-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-left: 1px solid var(--color-border);
-      border-top: 1px solid var(--color-border);
-      margin-top: 40px;
-    }
-
-    .cs-stat {
-      border-right: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
-      padding: 28px 24px 32px;
-    }
-
-    .cs-stat-num {
-      font-size: var(--text-3xl);
-      font-weight: 300;
-      letter-spacing: var(--ls-tight);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .cs-stat-label {
-      font-size: var(--text-xs);
-      letter-spacing: var(--ls-wide);
-      color: var(--color-muted);
-    }
-
-    /* tech stack list */
-    .cs-stack-list {
+    /* tech list */
+    .cs-tech-list {
       display: flex;
       flex-direction: column;
       border-top: 1px solid var(--color-border);
       margin-top: 40px;
     }
 
-    .cs-stack-item {
+    .cs-tech-item {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
@@ -476,17 +382,56 @@
       border-bottom: 1px solid var(--color-border);
     }
 
-    .cs-stack-name {
+    .cs-tech-name {
       font-size: var(--text-sm);
       font-weight: 400;
       color: var(--color-fg);
     }
 
-    .cs-stack-desc {
+    .cs-tech-desc {
       font-size: var(--text-xs);
       letter-spacing: var(--ls-wide);
       color: var(--color-muted);
       text-align: right;
+    }
+
+    /* learnings list */
+    .cs-learnings {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 40px;
+    }
+
+    .cs-learning-item {
+      display: flex;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .cs-learning-item:first-child { border-top: 1px solid var(--color-border); }
+
+    .cs-learning-num {
+      font-size: 11px;
+      letter-spacing: var(--ls-wide);
+      color: var(--color-muted);
+      flex-shrink: 0;
+      padding-top: 2px;
+      width: 20px;
+    }
+
+    .cs-learning-body h4 {
+      font-size: var(--text-sm);
+      font-weight: 400;
+      color: var(--color-fg);
+      margin-bottom: 6px;
+    }
+
+    .cs-learning-body p {
+      font-size: var(--text-xs);
+      color: var(--color-dim);
+      line-height: var(--lh-normal);
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -581,13 +526,8 @@
       .nav-mobile-toggle { display: block; }
 
       .cs-two-col { grid-template-columns: 1fr; }
-      .cs-stats   { grid-template-columns: 1fr 1fr; }
 
       .cs-title { font-size: clamp(28px, 8vw, 42px); }
-    }
-
-    @media (max-width: 420px) {
-      .cs-stats { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -614,12 +554,11 @@
     <aside class="cs-sidebar">
       <a href="work.html" class="cs-sidebar-back">← all work</a>
       <p class="cs-sidebar-label">sections</p>
-      <a href="#overview"    class="cs-nav-link active" data-section="overview">overview</a>
-      <a href="#concept"     class="cs-nav-link"        data-section="concept">the concept</a>
-      <a href="#ai-workflow" class="cs-nav-link"        data-section="ai-workflow">ai workflow</a>
-      <a href="#database"    class="cs-nav-link"        data-section="database">database</a>
-      <a href="#tech-stack"  class="cs-nav-link"        data-section="tech-stack">tech stack</a>
-      <a href="#whats-next"  class="cs-nav-link"        data-section="whats-next">what's next</a>
+      <a href="#overview"   class="cs-nav-link active" data-section="overview">overview</a>
+      <a href="#approach"   class="cs-nav-link"        data-section="approach">the approach</a>
+      <a href="#technology" class="cs-nav-link"        data-section="technology">technology</a>
+      <a href="#decisions"  class="cs-nav-link"        data-section="decisions">design decisions</a>
+      <a href="#learnings"  class="cs-nav-link"        data-section="learnings">what i learned</a>
     </aside>
 
     <!-- ── main content ─────────────────────────────── -->
@@ -628,161 +567,142 @@
       <!-- header -->
       <header class="cs-header" id="overview">
         <div class="cs-tags">
-          <span class="cs-tag">saas</span>
-          <span class="cs-tag">ai</span>
-          <span class="cs-tag">design engineering</span>
-          <span class="cs-tag">tailwind</span>
+          <span class="cs-tag">html</span>
+          <span class="cs-tag">css</span>
+          <span class="cs-tag">claude code</span>
+          <span class="cs-tag">vibe coding</span>
         </div>
-        <h1 class="cs-title">FormSense</h1>
-        <p class="cs-subtitle">An AI-powered form builder where users describe what they need in plain English and the AI generates a fully styled, live form instantly. Built as a design engineering project to explore natural language UI generation, real database architecture, and AI-first product thinking using Claude Code.</p>
+        <h1 class="cs-title">portfolio redesign</h1>
+        <p class="cs-subtitle">rebuilt my own portfolio from scratch using claude code and vibe coding. the entire site was designed and built through ai-assisted development. no figma, no mockups. just prompts, iterations, and live code.</p>
         <div class="cs-meta">
           <div>
             <p class="cs-meta-label">year</p>
-            <p class="cs-meta-value">2026</p>
+            <p class="cs-meta-value">2025</p>
           </div>
           <div>
             <p class="cs-meta-label">role</p>
-            <p class="cs-meta-value">design engineer</p>
+            <p class="cs-meta-value">design · engineering</p>
           </div>
           <div>
             <p class="cs-meta-label">platform</p>
-            <p class="cs-meta-value">web (Next.js)</p>
+            <p class="cs-meta-value">web</p>
           </div>
           <div>
-            <p class="cs-meta-label">live</p>
-            <a href="https://formsense-app.vercel.app" target="_blank" rel="noopener" class="cs-meta-link">formsense-app.vercel.app ↗</a>
+            <p class="cs-meta-label">tooling</p>
+            <p class="cs-meta-value">claude code · vs code</p>
           </div>
         </div>
       </header>
 
-      <!-- ── 01 THE CONCEPT ─────────────────────────── -->
-      <section id="concept" class="cs-section">
-        <p class="cs-section-label">01 — the concept</p>
-        <h2 class="cs-section-heading">replace the form builder with a single sentence</h2>
+      <!-- ── 01 THE APPROACH ────────────────────────── -->
+      <section id="approach" class="cs-section">
+        <p class="cs-section-label">01 — the approach</p>
+        <h2 class="cs-section-heading">design in the browser, not in figma</h2>
         <div class="cs-section-text">
-          <p>every form builder asks you to drag, drop, configure, and repeat. FormSense inverts that entirely. you type what you need: "a contact form with name, email, and a budget range", and the AI generates the full form: fields, labels, validation, and Tailwind styling, ready to publish.</p>
-          <p>the framing that shaped every decision was this: the AI loop is the product, not a feature. there's no legacy builder to fall back on. the natural language interface is the only interface. that constraint forced every design and engineering choice to serve the AI output, not sit alongside it.</p>
-          <p>the goal wasn't to automate form creation. it was to explore what a product looks like when the AI is the primary mode of interaction, and what that demands from the design and architecture underneath it.</p>
+          <p>vibe coding flips the traditional design workflow. instead of wireframes → mockups → handoff → build, the entire process collapses into one loop: prompt → live code → review → prompt again. there's no translation layer between design intent and implementation because they happen in the same place at the same time.</p>
+          <p>claude code was used to scaffold every section from scratch: structure, layout, typography, interactions, and then iterated on directly in the browser. decisions that would normally require a figma file and a development sprint happened in minutes. a hover state, a spacing adjustment, a new section, all driven by conversation rather than tools.</p>
+          <p>the constraint was deliberate: no design tools, no mockups, no prototypes. every design decision had to be made in real code, which meant the gap between thinking and seeing was almost zero. that speed changes how you think about the work.</p>
         </div>
-        <figure class="cs-screenshot">
-          <img src="assets/1.png" alt="FormSense landing page" />
-          <figcaption class="cs-screenshot-caption">landing page — built with next.js and tailwind css using claude code</figcaption>
-        </figure>
       </section>
 
-      <!-- ── 02 AI WORKFLOW ──────────────────────────── -->
-      <section id="ai-workflow" class="cs-section">
-        <p class="cs-section-label">02 — ai workflow</p>
-        <h2 class="cs-section-heading">built entirely with Claude Code</h2>
+      <!-- ── 02 TECHNOLOGY ──────────────────────────── -->
+      <section id="technology" class="cs-section">
+        <p class="cs-section-label">02 — technology</p>
+        <h2 class="cs-section-heading">small stack, deliberate choices</h2>
         <div class="cs-section-text">
-          <p>the entire product was scaffolded using Claude Code. rather than writing boilerplate by hand, prompts were used to generate Next.js page structures, Tailwind component layouts, Supabase query hooks, and full UI sections in real time. iteration happened through conversation: design decisions, layout adjustments, and component refactors were all driven by prompts.</p>
-          <p>this wasn't just about speed. it was a deliberate way to stress-test agentic AI development as a production workflow: understanding where it excels (component generation, repetitive structure, typed schemas), where it needs guidance (product logic, edge cases, visual judgment), and how to write prompts that produce useful, maintainable output rather than throwaway code.</p>
+          <p>the stack was kept intentionally minimal. no frameworks, no build tools, no dependencies. the goal was a site that loads instantly, costs nothing to host, and can be understood by reading a single file.</p>
         </div>
-
-        <figure class="cs-screenshot">
-          <img src="assets/2.png" alt="FormSense dashboard" />
-          <figcaption class="cs-screenshot-caption">dashboard — form cards with live stats</figcaption>
-        </figure>
-        <figure class="cs-screenshot">
-          <img src="assets/3.png" alt="FormSense AI form builder" />
-          <figcaption class="cs-screenshot-caption">ai form builder — plain english input generates live form preview</figcaption>
-        </figure>
-        <figure class="cs-screenshot">
-          <img src="assets/4.png" alt="FormSense responses dashboard" />
-          <figcaption class="cs-screenshot-caption">responses dashboard — ai summary card with pattern analysis</figcaption>
-        </figure>
+        <div class="cs-tech-list">
+          <div class="cs-tech-item">
+            <span class="cs-tech-name">html</span>
+            <span class="cs-tech-desc">semantic markup · no frameworks · single files</span>
+          </div>
+          <div class="cs-tech-item">
+            <span class="cs-tech-name">css</span>
+            <span class="cs-tech-desc">custom properties · layout · animation · no preprocessor</span>
+          </div>
+          <div class="cs-tech-item">
+            <span class="cs-tech-name">vanilla javascript</span>
+            <span class="cs-tech-desc">scroll behaviour · intersection observer · nav toggle</span>
+          </div>
+          <div class="cs-tech-item">
+            <span class="cs-tech-name">matter typeface</span>
+            <span class="cs-tech-desc">sole typeface · weights 300–600 · locally hosted</span>
+          </div>
+          <div class="cs-tech-item">
+            <span class="cs-tech-name">claude code</span>
+            <span class="cs-tech-desc">scaffolding · iteration · design decisions · all of it</span>
+          </div>
+          <div class="cs-tech-item">
+            <span class="cs-tech-name">git</span>
+            <span class="cs-tech-desc">version control · commit per session · github pages</span>
+          </div>
+        </div>
       </section>
 
-      <!-- ── 03 DATABASE ARCHITECTURE ───────────────── -->
-      <section id="database" class="cs-section">
-        <p class="cs-section-label">03 — database architecture</p>
-        <h2 class="cs-section-heading">a real schema built for a real product</h2>
+      <!-- ── 03 DESIGN DECISIONS ────────────────────── -->
+      <section id="decisions" class="cs-section">
+        <p class="cs-section-label">03 — design decisions</p>
+        <h2 class="cs-section-heading">constraints as a design system</h2>
         <div class="cs-section-text">
-          <p>the database runs on Supabase Postgres with two core tables. the <code>forms</code> table stores the form definition: user ownership, title, a <code>fields</code> JSONB column for the dynamic field schema, and a <code>is_published</code> flag for controlling live availability. the <code>responses</code> table captures each submission, linking back to the form and storing answers as JSONB alongside a <code>submitted_at</code> timestamp.</p>
-          <p>auth is handled by Supabase's built-in email provider. no third-party auth library needed. row-level security policies ensure users can only read and write their own forms and responses. the JSONB columns were a deliberate choice: form fields are variable by nature, and a flexible schema lets the AI generate any field configuration without requiring a migration.</p>
+          <p>every visual decision was a constraint. lowercase throughout. it removes formality and creates a consistent voice without needing a brand guide. a single typeface in multiple weights does all the hierarchy work that would normally require colour, size, and weight variation across a family of fonts.</p>
+          <p>no images. no icons. the portfolio is entirely text and space. that isn't minimalism for its own sake. it's a deliberate test of whether the work and the writing can carry the page on their own. generous whitespace forces each line to earn its place. if a section feels empty, the copy needs to be better, not filled with visuals.</p>
         </div>
         <div class="cs-two-col">
           <div class="cs-two-col-item">
-            <h4>forms</h4>
-            <p><code>id</code> · <code>user_id</code> · <code>title</code> · <code>fields</code> (jsonb) · <code>is_published</code></p>
+            <h4>lowercase throughout</h4>
+            <p>removes formality, creates a consistent voice, and means every typographic hierarchy decision is made through weight and size rather than capitalisation.</p>
           </div>
           <div class="cs-two-col-item">
-            <h4>responses</h4>
-            <p><code>id</code> · <code>form_id</code> · <code>answers</code> (jsonb) · <code>submitted_at</code></p>
+            <h4>single typeface</h4>
+            <p>matter in weights 300 to 600 handles everything: headings, body, labels, captions. no secondary typeface needed. the system is legible and scalable.</p>
           </div>
           <div class="cs-two-col-item">
-            <h4>auth</h4>
-            <p>Supabase email provider. row-level security policies scope all reads and writes to the authenticated user.</p>
+            <h4>no images, no icons</h4>
+            <p>text and space carry the page. if a section feels weak without a visual, the writing needs work, not a placeholder image or a decorative icon.</p>
           </div>
           <div class="cs-two-col-item">
-            <h4>why JSONB</h4>
-            <p>form fields are variable by design. JSONB lets the AI output any field schema: text, select, range, date, without a database migration for each new type.</p>
-          </div>
-        </div>
-        <figure class="cs-screenshot">
-          <img src="assets/5.png" alt="FormSense database schema" />
-          <figcaption class="cs-screenshot-caption">database schema — forms and responses tables in supabase postgres</figcaption>
-        </figure>
-      </section>
-
-      <!-- ── 04 TECH STACK ───────────────────────────── -->
-      <section id="tech-stack" class="cs-section">
-        <p class="cs-section-label">04 — tech stack</p>
-        <h2 class="cs-section-heading">chosen for speed, type safety, and AI compatibility</h2>
-        <div class="cs-section-text">
-          <p>the stack was chosen to keep the feedback loop as tight as possible, between prompt, generated code, and working UI, while maintaining a real production-quality architecture throughout.</p>
-        </div>
-        <div class="cs-stack-list">
-          <div class="cs-stack-item">
-            <span class="cs-stack-name">Next.js 14</span>
-            <span class="cs-stack-desc">app router · server components · typescript</span>
-          </div>
-          <div class="cs-stack-item">
-            <span class="cs-stack-name">Tailwind CSS</span>
-            <span class="cs-stack-desc">utility-first · AI-generated layouts · consistent tokens</span>
-          </div>
-          <div class="cs-stack-item">
-            <span class="cs-stack-name">Supabase</span>
-            <span class="cs-stack-desc">postgres · auth · row-level security · real-time</span>
-          </div>
-          <div class="cs-stack-item">
-            <span class="cs-stack-name">Framer Motion</span>
-            <span class="cs-stack-desc">page transitions · micro-interactions · form animations</span>
-          </div>
-          <div class="cs-stack-item">
-            <span class="cs-stack-name">Claude Code</span>
-            <span class="cs-stack-desc">agentic scaffolding · component generation · design iteration</span>
-          </div>
-          <div class="cs-stack-item">
-            <span class="cs-stack-name">Vercel</span>
-            <span class="cs-stack-desc">deployment · preview environments · edge functions</span>
+            <h4>hover states only where earned</h4>
+            <p>interactions are reserved for elements that respond to them meaningfully: nav links, case cards, skill rows. nothing animates by default unless it communicates something.</p>
           </div>
         </div>
       </section>
 
-      <!-- ── 05 WHAT'S NEXT ──────────────────────────── -->
-      <section id="whats-next" class="cs-section">
-        <p class="cs-section-label">05 — what's next</p>
-        <h2 class="cs-section-heading">the path to a fully live product</h2>
+      <!-- ── 04 WHAT I LEARNED ───────────────────────── -->
+      <section id="learnings" class="cs-section">
+        <p class="cs-section-label">04 — what i learned</p>
+        <h2 class="cs-section-heading">how ai changes the design workflow</h2>
         <div class="cs-section-text">
-          <p>FormSense is a working proof of concept. the architecture is real, the UI is built, and the design patterns are established. the next phase wires it all together into a live, end-to-end product.</p>
+          <p>building entirely through prompts surfaces things about your own design thinking that are easy to miss when using traditional tools.</p>
         </div>
-        <div class="cs-two-col">
-          <div class="cs-two-col-item">
-            <h4>connect the Claude API</h4>
-            <p>wire the form builder prompt input to the Claude API so that plain English descriptions generate real, structured field schemas, not placeholder data.</p>
+        <div class="cs-learnings">
+          <div class="cs-learning-item">
+            <span class="cs-learning-num">01</span>
+            <div class="cs-learning-body">
+              <h4>speed removes the fear of throwing things away</h4>
+              <p>when a section takes 10 seconds to scaffold instead of an hour to design, you become much more willing to delete it and start over. the low cost of iteration makes the output better because you're not precious about what you've built.</p>
+            </div>
           </div>
-          <div class="cs-two-col-item">
-            <h4>wire up Supabase auth</h4>
-            <p>activate the full auth flow: sign up, sign in, session persistence, and row-level security, so users have a real account and private form workspace.</p>
+          <div class="cs-learning-item">
+            <span class="cs-learning-num">02</span>
+            <div class="cs-learning-body">
+              <h4>prompting well is a design skill</h4>
+              <p>a vague prompt produces vague output. the clearer and more specific the brief: the aesthetic reference, the spacing logic, the exact behaviour, the more useful the result. writing a good prompt and writing a good design brief require exactly the same skill.</p>
+            </div>
           </div>
-          <div class="cs-two-col-item">
-            <h4>live form publishing</h4>
-            <p>build the public-facing form URL. when a user hits publish, a live shareable link is generated and responses flow back into their dashboard in real time.</p>
+          <div class="cs-learning-item">
+            <span class="cs-learning-num">03</span>
+            <div class="cs-learning-body">
+              <h4>know when to stop prompting and just write</h4>
+              <p>claude code is fast at structure and layout but slower at nuance. fine-grained spacing adjustments, copy edits, and subtle motion decisions are often faster to write by hand. the workflow is not "prompt everything". it's knowing which decisions belong to the ai and which belong to you.</p>
+            </div>
           </div>
-          <div class="cs-two-col-item">
-            <h4>response analytics</h4>
-            <p>visualise submission data directly in the dashboard: completion rates, field drop-off, and a simple answer summary for each published form.</p>
+          <div class="cs-learning-item">
+            <span class="cs-learning-num">04</span>
+            <div class="cs-learning-body">
+              <h4>the design tool is now the conversation</h4>
+              <p>figma externalises thinking onto a canvas. vibe coding externalises it into language. both require clarity about what you want, but prompting forces you to articulate decisions in words rather than gestures, which produces a different and often more considered kind of design rationale.</p>
+            </div>
           </div>
         </div>
       </section>

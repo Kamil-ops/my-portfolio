@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>krystianux — branding concept</title>
+<style>
+  
+
+  @font-face { font-family: Matter; src: url(fonts/Matter-TRIAL-Light.otf) format("opentype"); font-weight: 300; font-style: normal; }
+  @font-face { font-family: Matter; src: url(fonts/Matter-TRIAL-Regular.otf) format("opentype"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: Matter; src: url(fonts/Matter-TRIAL-Medium.otf) format("opentype"); font-weight: 500; font-style: normal; }
+
+  :root {
+    --bg:        #0a0a0a;
+    --bg-2:      #111111;
+    --bg-3:      #161616;
+    --border:    rgba(255,255,255,0.10);
+    --border-hi: rgba(255,255,255,0.20);
+    --text:      #ffffff;
+    --muted:     rgba(255,255,255,0.40);
+    --muted-2:   rgba(255,255,255,0.15);
+    --accent-1:  #81adec;   /* blue — primary accent */
+    --accent-2:  #7b6ef6;   /* soft violet — secondary      */
+    --accent-3:  #f05555;   /* warm red — tertiary / error  */
+    --accent-4:  #55c8f0;   /* cool cyan — info / highlight */
+    --font: Matter, system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border-hi); }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1120px; margin: 0 auto; padding: 60px 40px 120px; }
+
+  /* ── TOP LABEL ── */
+  .doc-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    display: inline-block;
+    padding: 5px 12px;
+    margin-bottom: 64px;
+  }
+
+  /* ── SECTION ── */
+  section { margin-bottom: 80px; }
+  .section-title {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── HERO LOGO SHOWCASE ── */
+  .logo-hero {
+    position: relative;
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 2px;
+  }
+
+  /* Ghost large K */
+  .logo-hero::before {
+    content: 'K';
+    position: absolute;
+    font-size: 520px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.025);
+    line-height: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    font-family: var(--font);
+  }
+
+  .logo-mark {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* SVG K mark */
+  .k-mark {
+    width: 72px;
+    height: 72px;
+    border: 1px solid var(--border-hi);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: var(--bg);
+  }
+  .k-mark svg { width: 38px; height: 38px; }
+
+  .logo-wordmark {
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: lowercase;
+    color: var(--text);
+  }
+  .logo-wordmark span { color: var(--accent-1); }
+
+  /* ── LOGO VARIANTS ROW ── */
+  .logo-variants {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .variant-cell {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: border-color 0.2s;
+  }
+  .variant-cell:hover { border-color: var(--border-hi); }
+  .variant-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* Variant 1 — square */
+  .v1 .k-box {
+    width: 48px; height: 48px;
+    border: 1px solid var(--border-hi);
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+  }
+  .v1 .k-box span {
+    font-size: 22px; font-weight: 500; color: var(--accent-1);
+    font-family: var(--font);
+  }
+
+  /* Variant 2 — accent filled */
+  .v2 .k-box {
+    width: 48px; height: 48px;
+    background: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .v2 .k-box span {
+    font-size: 22px; font-weight: 500; color: #0a0a0a;
+    font-family: var(--font);
+  }
+
+  /* Variant 3 — wordmark only */
+  .v3 .word {
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    color: var(--text);
+    font-family: var(--font);
+  }
+  .v3 .word em { color: var(--accent-1); font-style: normal; }
+
+  /* Variant 4 — light bg */
+  .v4 { background: #f5f5f0 !important; }
+  .v4 .k-box {
+    width: 48px; height: 48px;
+    border: 1px solid rgba(0,0,0,0.15);
+    display: flex; align-items: center; justify-content: center;
+    background: #0a0a0a;
+  }
+  .v4 .k-box span {
+    font-size: 22px; font-weight: 500; color: var(--accent-1);
+    font-family: var(--font);
+  }
+  .v4 .variant-label { color: rgba(0,0,0,0.4); }
+
+  /* ── COLOUR PALETTE ── */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+  .swatch {
+    aspect-ratio: 1;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: transform 0.15s;
+  }
+  .swatch:hover { transform: scale(1.04); z-index: 2; }
+  .swatch-name {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .swatch-hex {
+    font-size: 8px;
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+  }
+  /* dark text for light swatches */
+  .swatch.light .swatch-name,
+  .swatch.light .swatch-hex { color: #0a0a0a; }
+
+  /* ── TYPOGRAPHY SHOWCASE ── */
+  .type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .type-cell {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    padding: 32px;
+  }
+  .type-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .headline-sample {
+    font-family: var(--font);
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .headline-sample .dim { color: var(--muted); }
+  .headline-sample .accent { color: var(--accent-1); }
+  .subhead-sample {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 12px;
+  }
+  .body-sample {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.75);
+  }
+  .label-sample {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── BACKGROUND TEXTURE EFFECTS ── */
+  .bg-effects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .effect-cell {
+    border: 1px solid var(--border);
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+  }
+  .effect-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Effect 1 — ghost UX text */
+  .eff-ghost-ux {
+    background: var(--bg-2);
+  }
+  .eff-ghost-ux::before {
+    content: 'UX';
+    position: absolute;
+    font-size: 180px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    font-family: var(--font);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    letter-spacing: -0.05em;
+  }
+
+  /* Effect 2 — dot grid */
+  .eff-dots {
+    background: var(--bg-2);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Effect 3 — grid lines */
+  .eff-grid {
+    background: var(--bg-2);
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Effect 4 — accent glow */
+  .eff-glow {
+    background: var(--bg-2);
+  }
+  .eff-glow::before {
+    content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(129,173,236,0.15) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Effect 5 — scanlines */
+  .eff-scan {
+    background: var(--bg-2);
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255,255,255,0.015) 3px,
+      rgba(255,255,255,0.015) 4px
+    );
+  }
+
+  /* Effect 6 — ghost K + dot grid combined */
+  .eff-combo {
+    background: var(--bg-2);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .eff-combo::before {
+    content: 'K';
+    position: absolute;
+    font-size: 240px;
+    font-weight: 700;
+    color: rgba(129,173,236,0.05);
+    font-family: var(--font);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: -0.05em;
+  }
+
+  /* ── UI COMPONENTS ── */
+  .ui-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+  }
+  .ui-cell {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    padding: 32px;
+  }
+  .ui-cell-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  /* button styles */
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-family: var(--font);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: lowercase;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+  .btn-primary {
+    background: var(--accent-1);
+    color: #0a0a0a;
+  }
+  .btn-primary:hover { background: #d4f566; }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-hi);
+  }
+  .btn-outline:hover { border-color: var(--accent-1); color: var(--accent-1); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--border-hi); }
+
+  /* tag */
+  .tag {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+  .tag-blue  { border-color: var(--accent-1); color: var(--accent-1); }
+  .tag-violet{ border-color: var(--accent-2); color: var(--accent-2); }
+  .tag-cyan  { border-color: var(--accent-4); color: var(--accent-4); }
+  .tag-muted { border-color: var(--border); color: var(--muted); }
+
+  /* card preview */
+  .mini-card {
+    border: 1px solid var(--border);
+    background: var(--bg-3);
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .mini-card:hover { border-color: var(--border-hi); }
+  .mini-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .mini-card-idx {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .mini-card-arrow {
+    font-size: 11px;
+    color: var(--accent-1);
+    transform: rotate(-45deg);
+    display: inline-block;
+  }
+  .mini-card-title {
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .mini-card-sub {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* nav preview */
+  .nav-preview {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+  }
+  .nav-logo-mark {
+    width: 28px; height: 28px;
+    border: 1px solid var(--border-hi);
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent-1);
+    font-family: var(--font);
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--text); }
+
+  /* ── SHADOW EFFECTS ── */
+  .shadow-showcase {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 40px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+  }
+  .shadow-box {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  .shadow-box.s1 { box-shadow: 0 4px 24px rgba(129,173,236,0.08); }
+  .shadow-box.s2 { box-shadow: 0 8px 40px rgba(129,173,236,0.14), 0 0 0 1px rgba(129,173,236,0.1); }
+  .shadow-box.s3 { box-shadow: 0 0 60px rgba(129,173,236,0.20), inset 0 1px 0 rgba(129,173,236,0.1); border-color: rgba(129,173,236,0.2); }
+  .shadow-name { color: var(--text); font-size: 11px; }
+
+  /* ── FOOTER ── */
+  .concept-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-note {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+  }
+  .footer-k {
+    width: 22px; height: 22px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500;
+    color: var(--accent-1);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="doc-label">krystianux — branding concept v1 — 2026</div>
+
+  <!-- ══ LOGO ══ -->
+  <section>
+    <div class="section-title">01 — logo mark</div>
+    <div class="logo-hero">
+      <div class="logo-mark">
+        <div class="k-mark">
+          <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Geometric K built from lines -->
+            <line x1="10" y1="6"  x2="10" y2="32" stroke="white" stroke-width="2"/>
+            <line x1="10" y1="19" x2="28" y2="6"  stroke="white" stroke-width="2"/>
+            <line x1="10" y1="19" x2="28" y2="32" stroke="white" stroke-width="2"/>
+            <!-- accent dot -->
+            <circle cx="28" cy="6" r="2.5" fill="#81adec"/>
+          </svg>
+        </div>
+        <div class="logo-wordmark">krystian<span>ux</span></div>
+      </div>
+    </div>
+
+    <div class="logo-variants">
+      <div class="variant-cell v1">
+        <div class="k-box"><span>k</span></div>
+        <div class="variant-label">mark / dark</div>
+      </div>
+      <div class="variant-cell v2">
+        <div class="k-box"><span>k</span></div>
+        <div class="variant-label">mark / filled</div>
+      </div>
+      <div class="variant-cell v3">
+        <div class="word">krystian<em>ux</em></div>
+        <div class="variant-label">wordmark</div>
+      </div>
+      <div class="variant-cell v4">
+        <div class="k-box"><span>k</span></div>
+        <div class="variant-label">mark / light bg</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ COLOURS ══ -->
+  <section>
+    <div class="section-title">02 — colour system</div>
+    <div class="palette-grid">
+      <div class="swatch" style="background:#0a0a0a">
+        <div class="swatch-name">base</div>
+        <div class="swatch-hex">#0a0a0a</div>
+      </div>
+      <div class="swatch" style="background:#111111">
+        <div class="swatch-name">surface</div>
+        <div class="swatch-hex">#111111</div>
+      </div>
+      <div class="swatch" style="background:#1e1e1e">
+        <div class="swatch-name">raised</div>
+        <div class="swatch-hex">#1e1e1e</div>
+      </div>
+      <div class="swatch" style="background:rgba(255,255,255,0.40)">
+        <div class="swatch-name">muted</div>
+        <div class="swatch-hex">white / 40%</div>
+      </div>
+      <div class="swatch" style="background:#81adec">
+        <div class="swatch-name">blue</div>
+        <div class="swatch-hex">#81adec</div>
+      </div>
+      <div class="swatch" style="background:#7b6ef6">
+        <div class="swatch-name">violet</div>
+        <div class="swatch-hex">#7b6ef6</div>
+      </div>
+      <div class="swatch" style="background:#55c8f0">
+        <div class="swatch-name">cyan</div>
+        <div class="swatch-hex">#55c8f0</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TYPOGRAPHY ══ -->
+  <section>
+    <div class="section-title">03 — typography</div>
+    <div class="type-grid">
+      <div class="type-cell">
+        <div class="type-label">headline / two-tone</div>
+        <div class="headline-sample">
+          <span class="dim">designing</span><br>
+          <span>experiences</span><br>
+          <span class="accent">that work.</span>
+        </div>
+      </div>
+      <div class="type-cell">
+        <div class="type-label">headline / large</div>
+        <div class="headline-sample" style="font-size:32px">
+          ux designer<br>
+          <span class="dim">based in london</span><br>
+          <span class="accent">available →</span>
+        </div>
+      </div>
+      <div class="type-cell">
+        <div class="type-label">body text</div>
+        <div class="body-sample">
+          i design digital products with a focus on clarity, function, and detail. currently open to full-time and freelance opportunities.
+        </div>
+        <div class="subhead-sample" style="margin-top:16px">ux design · product design · prototyping</div>
+      </div>
+      <div class="type-cell">
+        <div class="type-label">labels &amp; metadata</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="label-sample">01 — selected work</div>
+          <div class="label-sample" style="color:var(--accent-1)">currently available</div>
+          <div class="label-sample">2024 · ux design · mobile</div>
+          <div class="label-sample" style="color:var(--accent-2)">case study →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ BACKGROUND EFFECTS ══ -->
+  <section>
+    <div class="section-title">04 — background texture options</div>
+    <div class="bg-effects">
+      <div class="effect-cell eff-ghost-ux">
+        <div class="effect-label">ghost "ux" text</div>
+      </div>
+      <div class="effect-cell eff-dots">
+        <div class="effect-label">dot grid</div>
+      </div>
+      <div class="effect-cell eff-grid">
+        <div class="effect-label">line grid</div>
+      </div>
+      <div class="effect-cell eff-glow">
+        <div class="effect-label">accent glow</div>
+      </div>
+      <div class="effect-cell eff-scan">
+        <div class="effect-label">scanlines</div>
+      </div>
+      <div class="effect-cell eff-combo">
+        <div class="effect-label">ghost k + dots (combined)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SHADOW SYSTEM ══ -->
+  <section>
+    <div class="section-title">05 — accent shadow system</div>
+    <div class="shadow-showcase">
+      <div class="shadow-box s1">
+        <div class="shadow-name">subtle</div>
+        box-shadow: 0 4px 24px<br>rgba(blue, 0.08)
+      </div>
+      <div class="shadow-box s2">
+        <div class="shadow-name">medium + outline</div>
+        box-shadow: 0 8px 40px<br>rgba(blue, 0.14)
+      </div>
+      <div class="shadow-box s3">
+        <div class="shadow-name">strong / hero cards</div>
+        box-shadow: 0 0 60px<br>rgba(blue, 0.20)
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ UI COMPONENTS ══ -->
+  <section>
+    <div class="section-title">06 — ui components</div>
+
+    <!-- nav -->
+    <div style="margin-bottom:2px">
+      <nav class="nav-preview">
+        <div class="nav-logo">
+          <div class="nav-logo-mark">k</div>
+          <span style="color:var(--muted);letter-spacing:0.15em">krystian<span style="color:var(--accent-1)">ux</span></span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#" class="active">work</a></li>
+          <li><a href="#">about</a></li>
+          <li><a href="#">contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="ui-grid" style="margin-top:2px">
+      <div class="ui-cell">
+        <div class="ui-cell-label">buttons</div>
+        <button class="btn btn-primary">view work →</button>
+        <button class="btn btn-outline">get in touch</button>
+        <button class="btn btn-ghost">download cv</button>
+      </div>
+      <div class="ui-cell">
+        <div class="ui-cell-label">tags / chips</div>
+        <span class="tag tag-blue">ux design</span>
+        <span class="tag tag-violet">product</span>
+        <span class="tag tag-cyan">mobile</span>
+        <span class="tag tag-muted">2024</span>
+        <span class="tag tag-muted">figma</span>
+        <span class="tag tag-blue">available</span>
+      </div>
+      <div class="ui-cell">
+        <div class="ui-cell-label">work card preview</div>
+        <div class="mini-card">
+          <div class="mini-card-top">
+            <span class="mini-card-idx">01</span>
+            <span class="mini-card-arrow">↗</span>
+          </div>
+          <div class="mini-card-title">banking app redesign</div>
+          <div class="mini-card-sub">ux design · mobile · 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TONE & VOICE ══ -->
+  <section>
+    <div class="section-title">07 — tone &amp; voice</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px;">
+
+      <!-- Personality -->
+      <div style="border:1px solid var(--border);background:var(--bg-2);padding:32px;">
+        <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;">personality</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:baseline;gap:12px;">
+            <span style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);min-width:80px;">serious</span>
+            <span style="flex:1;height:1px;background:var(--border);"></span>
+            <span style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);min-width:80px;text-align:right;">playful</span>
+          </div>
+          <div style="position:relative;height:4px;background:var(--bg-3);border:1px solid var(--border);">
+            <div style="position:absolute;left:0;top:0;width:65%;height:100%;background:var(--text);"></div>
+          </div>
+          <div style="font-size:10px;color:var(--muted);margin-top:4px;">65% serious craft · 35% dry wit</div>
+        </div>
+
+        <div style="margin-top:28px;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:10px;letter-spacing:0.08em;color:var(--text);">✦ &nbsp;research-led, never random</div>
+          <div style="font-size:10px;letter-spacing:0.08em;color:var(--text);">✦ &nbsp;confident but not arrogant</div>
+          <div style="font-size:10px;letter-spacing:0.08em;color:var(--text);">✦ &nbsp;dry humour, used sparingly</div>
+          <div style="font-size:10px;letter-spacing:0.08em;color:var(--text);">✦ &nbsp;lowercase always — approachable</div>
+          <div style="font-size:10px;letter-spacing:0.08em;color:var(--text);">✦ &nbsp;earned moments of fun, not forced</div>
+        </div>
+      </div>
+
+      <!-- Writing rules -->
+      <div style="border:1px solid var(--border);background:var(--bg-2);padding:32px;">
+        <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;">writing rules</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <div style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">do</div>
+            <div style="font-size:11px;color:var(--text);line-height:1.7;">"i turn complexity into clarity"<br>"doughnut-driven 🍩"<br>"unlock cv"<br>"based in scotland, not sorry about the weather"</div>
+          </div>
+          <div style="height:1px;background:var(--border);"></div>
+          <div>
+            <div style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">don't</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.7;">"passionate designer"<br>"synergising user journeys"<br>"innovative solutions"<br>anything a recruiter wrote</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button copy examples -->
+    <div style="border:1px solid var(--border);background:var(--bg-2);padding:32px;margin-bottom:2px;">
+      <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;">button copy — serious + fun pairings</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:9px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">cv / resume</div>
+          <button style="font-family:inherit;font-size:11px;letter-spacing:0.12em;padding:10px 16px;background:var(--text);color:var(--bg);border:none;cursor:pointer;text-align:left;">unlock cv →</button>
+          <button style="font-family:inherit;font-size:11px;letter-spacing:0.12em;padding:10px 16px;background:transparent;color:var(--muted);border:1px solid var(--border);cursor:pointer;text-align:left;">download cv</button>
+          <div style="font-size:9px;color:var(--muted);margin-top:2px;">top = use this one</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:9px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">contact</div>
+          <button style="font-family:inherit;font-size:11px;letter-spacing:0.12em;padding:10px 16px;background:var(--text);color:var(--bg);border:none;cursor:pointer;text-align:left;">let's talk →</button>
+          <button style="font-family:inherit;font-size:11px;letter-spacing:0.12em;padding:10px 16px;background:transparent;color:var(--muted);border:1px solid var(--border);cursor:pointer;text-align:left;">get in touch</button>
+          <button style="font-family:inherit;font-size:11px;letter-spacing:0.12em;padding:10px 16px;background:transparent;color:var(--muted);border:1px solid var(--border);cursor:pointer;text-align:left;">don't be shy →</button>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:9px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">work / case studies</div>
+          <button style="font-family:inherit;font-size:11px;letter-spacing:0.12em;padding:10px 16px;background:var(--text);color:var(--bg);border:none;cursor:pointer;text-align:left;">see the work →</button>
+          <button style="font-family:inherit;font-size:11px;letter-spacing:0.12em;padding:10px 16px;background:transparent;color:var(--muted);border:1px solid var(--border);cursor:pointer;text-align:left;">i made this →</button>
+          <button style="font-family:inherit;font-size:11px;letter-spacing:0.12em;padding:10px 16px;background:transparent;color:var(--muted);border:1px solid var(--border);cursor:pointer;text-align:left;">read the case study</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Microcopy examples -->
+    <div style="border:1px solid var(--border);background:var(--bg-2);padding:32px;">
+      <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;">microcopy examples</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2px;">
+
+        <div style="background:var(--bg-3);border:1px solid var(--border);padding:20px;display:flex;flex-direction:column;gap:6px;">
+          <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">availability status</div>
+          <div style="font-size:13px;color:var(--text);">currently open to full-time ux roles</div>
+          <div style="font-size:11px;color:var(--muted);">→ or: "available · won't bite"</div>
+        </div>
+
+        <div style="background:var(--bg-3);border:1px solid var(--border);padding:20px;display:flex;flex-direction:column;gap:6px;">
+          <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">hero eyebrow</div>
+          <div style="font-size:13px;color:var(--text);">ux designer · based in scotland</div>
+          <div style="font-size:11px;color:var(--muted);">→ or: "ux designer · powered by research &amp; doughnuts 🍩"</div>
+        </div>
+
+        <div style="background:var(--bg-3);border:1px solid var(--border);padding:20px;display:flex;flex-direction:column;gap:6px;">
+          <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">footer</div>
+          <div style="font-size:13px;color:var(--text);">krystian kowalczyk · krystianux.com</div>
+          <div style="font-size:11px;color:var(--muted);">→ or: "designed &amp; coded by krystian · no doughnuts were harmed"</div>
+        </div>
+
+        <div style="background:var(--bg-3);border:1px solid var(--border);padding:20px;display:flex;flex-direction:column;gap:6px;">
+          <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">404 page</div>
+          <div style="font-size:13px;color:var(--text);">page not found</div>
+          <div style="font-size:11px;color:var(--muted);">→ or: "you broke it. just kidding — this page doesn't exist"</div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="concept-footer">
+    <div class="footer-note">all elements use matter font family in production</div>
+    <div class="footer-logo">
+      <div class="footer-k">k</div>
+      krystianux
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

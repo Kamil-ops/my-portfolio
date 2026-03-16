@@ -313,6 +313,15 @@
       margin-top: 40px;
     }
 
+    .project-coming-soon {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: var(--ls-wide);
+      color: rgba(240,239,228,0.2);
+      margin-top: 8px;
+      display: block;
+    }
+
     /* ═══════════════════════════════════════════════════════
        CONTACT
     ═══════════════════════════════════════════════════════ */
@@ -452,7 +461,7 @@
         <span>all projects</span>
         <span class="name-dim">six case studies</span>
       </h1>
-      <p class="page-hero-sub">ux research, product design, and webflow development</p>
+      <p class="page-hero-sub">ux design, design engineering, and ai-assisted development</p>
     </div>
   </header>
 
@@ -462,34 +471,35 @@
       <p class="section-label">work</p>
       <div class="projects-grid">
 
-        <article class="project-card">
+        <article class="project-card" onclick="location.href='case-study-financial-dashboard.html'" role="link" tabindex="0" onkeydown="if(event.key==='Enter')location.href='case-study-financial-dashboard.html'" style="cursor:pointer;">
           <div class="project-card-top">
-            <span class="project-tag">fintech · saas · b2b</span>
+            <span class="project-tag">saas · ai · design engineering</span>
             <span class="project-num">01</span>
           </div>
-          <h2 class="project-title">financial dashboard</h2>
-          <p class="project-desc">turning complex data into higher client retention</p>
+          <h2 class="project-title">formsense</h2>
+          <p class="project-desc">an ai-powered form builder where plain english generates a fully styled live form instantly</p>
+          <span class="project-year">2026</span>
+        </article>
+
+        <article class="project-card" onclick="location.href='portfolio-redesign.html'" role="link" tabindex="0" onkeydown="if(event.key==='Enter')location.href='portfolio-redesign.html'" style="cursor:pointer;">
+          <div class="project-card-top">
+            <span class="project-tag">html · css · claude code · vibe coding</span>
+            <span class="project-num">02</span>
+          </div>
+          <h2 class="project-title">portfolio redesign</h2>
+          <p class="project-desc">rebuilt from scratch through ai-assisted development. no figma, no mockups, just prompts and live code</p>
           <span class="project-year">2025</span>
         </article>
 
         <article class="project-card">
           <div class="project-card-top">
             <span class="project-tag">healthcare · mobile · ux</span>
-            <span class="project-num">02</span>
-          </div>
-          <h2 class="project-title">healthcare app</h2>
-          <p class="project-desc">restoring patient control through mobile-first design</p>
-          <span class="project-year">2025</span>
-        </article>
-
-        <article class="project-card">
-          <div class="project-card-top">
-            <span class="project-tag">branding · strategy</span>
             <span class="project-num">03</span>
           </div>
-          <h2 class="project-title">portfolio redesign</h2>
-          <p class="project-desc">redesigning my positioning to target ux roles</p>
+          <h2 class="project-title">healthcare app</h2>
+          <p class="project-desc">patient-facing mobile app connecting people with NHS-registered therapists through 24 moderated research sessions</p>
           <span class="project-year">2025</span>
+          <span class="project-coming-soon">case study coming soon</span>
         </article>
 
         <article class="project-card">
@@ -500,6 +510,7 @@
           <h2 class="project-title">analytics platform</h2>
           <p class="project-desc">simplifying complex data for non-technical users</p>
           <span class="project-year">2024</span>
+          <span class="project-coming-soon">case study coming soon</span>
         </article>
 
         <article class="project-card">
@@ -510,6 +521,7 @@
           <h2 class="project-title">retail app redesign</h2>
           <p class="project-desc">reducing drop-off through clearer purchase flows</p>
           <span class="project-year">2024</span>
+          <span class="project-coming-soon">case study coming soon</span>
         </article>
 
         <article class="project-card">
@@ -520,6 +532,7 @@
           <h2 class="project-title">discovery sprint</h2>
           <p class="project-desc">three-week research sprint for an early-stage startup</p>
           <span class="project-year">2024</span>
+          <span class="project-coming-soon">case study coming soon</span>
         </article>
 
       </div>
