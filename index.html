@@ -1499,7 +1499,7 @@ Projects:
 - This portfolio: designed and built from scratch, typography-led with motion and AI features.
 --- END PROFILE ---`;
 
-      const KEY     = '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';
+      const KEY     = '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';
       const MODEL   = 'openai/gpt-oss-120b';
       const msgsEl  = document.getElementById('twinMsgs');
       const form    = document.getElementById('twinForm');
@@ -1569,6 +1569,7 @@ Projects:
           typing.remove();
 
           if (data.error) {
+            console.error('OpenRouter error:', JSON.stringify(data.error));
             addMsg('assistant', 'something went wrong — try again in a moment.');
             history.pop();
           } else {
