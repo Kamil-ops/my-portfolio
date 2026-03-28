@@ -1499,8 +1499,6 @@ Projects:
 - This portfolio: designed and built from scratch, typography-led with motion and AI features.
 --- END PROFILE ---`;
 
-      const KEY     = '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';
-      const MODEL   = 'openai/gpt-oss-120b';
       const msgsEl  = document.getElementById('twinMsgs');
       const form    = document.getElementById('twinForm');
       const input   = document.getElementById('twinInput');
@@ -1552,16 +1550,10 @@ Projects:
         const typing = addTyping();
 
         try {
-          const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          const res = await fetch('/api/chat', {
             method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${KEY}`,
-              'Content-Type': 'application/json',
-              'HTTP-Referer': window.location.href,
-              'X-Title': 'Krystian Portfolio'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              model: MODEL,
               messages: [{ role: 'system', content: SYSTEM }, ...history]
             })
           });
