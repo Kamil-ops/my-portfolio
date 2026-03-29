@@ -1569,7 +1569,8 @@ Projects:
             addMsg('assistant', reply);
             history.push({ role: 'assistant', content: reply });
           }
-        } catch {
+        } catch (err) {
+          console.error('Chat fetch error:', err);
           typing.remove();
           addMsg('assistant', 'connection issue — try again in a moment.');
           history.pop();
