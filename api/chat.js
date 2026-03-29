@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
         'X-Title': 'Krystian Portfolio'
       },
       body: JSON.stringify({
-        model: 'google/gemma-2-9b-it:free',
+        model: 'mistralai/mistral-7b-instruct:free',
         messages
       })
     });
