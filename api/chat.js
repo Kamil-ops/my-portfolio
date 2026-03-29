@@ -11,23 +11,40 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid request body' });
   }
 
+  // Anthropic expects system prompt separate from messages
+  const systemMsg = messages.find(m => m.role === 'system');
+  const chatMsgs  = messages.filter(m => m.role !== 'system');
+
   try {
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://krystian-k.com',
-        'X-Title': 'Krystian Portfolio'
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'stepfun/step-3.5-flash:free',
-        messages
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 512,
+        system: systemMsg ? systemMsg.content : '',
+        messages: chatMsgs
       })
     });
 
     const data = await response.json();
-    return res.status(200).json(data);
+
+    if (data.error) {
+      return res.status(200).json({ error: data.error });
+    }
+
+    // Normalise to OpenAI-style response so frontend works unchanged
+    return res.status(200).json({
+      choices: [{
+        message: {
+          content: data.content[0].text
+        }
+      }]
+    });
   } catch (err) {
     return res.status(500).json({ error: 'Proxy error', detail: err.message });
   }
