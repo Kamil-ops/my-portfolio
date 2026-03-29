@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
         'X-Title': 'Krystian Portfolio'
       },
       body: JSON.stringify({
-        model: 'liquid/lfm-2.5-1.2b-instruct:free',
+        model: 'stepfun/step-3.5-flash:free',
         messages
       })
     });
