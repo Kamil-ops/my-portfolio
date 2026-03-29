@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
         'X-Title': 'Krystian Portfolio'
       },
       body: JSON.stringify({
-        model: 'nvidia/nemotron-3-super-120b-a12b:free',
+        model: 'liquid/lfm-2.5-1.2b-instruct:free',
         messages
       })
     });
